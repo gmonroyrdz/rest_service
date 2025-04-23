@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") // Permitir solicitudes desde el frontend
+@Tag(name = "Employees", description = "Employee management API")
 public class EmployeeController {
     private final EmployeeRepository repository;
 
@@ -21,16 +25,19 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees")
+    @Operation(summary = "Get all employees")
     List<Employee> all(){
     return repository.findAll();
 }
     @PostMapping("/employees")
+    @Operation(summary = "Create a new employee")
     Employee newEmployee(@RequestBody Employee newEmployee) {
         return repository.save(newEmployee);
     }
 
     // Single item
     @GetMapping("/employees/{id}")
+    @Operation(summary = "Get employee by ID")
     Employee one(@PathVariable Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException(id));

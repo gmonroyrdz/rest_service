@@ -1,15 +1,19 @@
 package mx.uam.payroll;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
+@Schema(description = "Employee entity")
 public class Employee {
     
     private @Id
     @GeneratedValue Long id;
+    @Schema(description = "Full name of the employee")
     private String name;
+    @Schema(description = "Role or position")
     private String role;
 
     public Employee() {
