@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") // Permitir solicitudes desde el frontend
 public class EmployeeController {
@@ -20,7 +23,9 @@ public class EmployeeController {
         this.repository = repository;
     }
 
+    
     @GetMapping("/employees")
+    @Operation(description="Obtiene todos los empleados registrados")
     List<Employee> all(){
     return repository.findAll();
 }
